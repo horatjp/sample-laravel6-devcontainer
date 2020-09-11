@@ -1,0 +1,17 @@
+{
+	"name": "Laravel6",
+
+	"dockerComposeFile": [
+		"docker-compose.yml"
+    ],
+
+    "service": "workspace",
+    "workspaceFolder": "/var/www",
+    "remoteUser": "vscode",
+
+	"settings": {
+		"terminal.integrated.shell.linux": null
+    },
+
+	"extensions": []
+}

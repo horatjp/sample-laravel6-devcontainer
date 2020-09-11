@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+body{
+    font-family: 'YakuHanJP','Noto Sans JP',"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+    font-weight: 400;
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+    font-family: 'YakuHanJP','Noto Sans JP',"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "游ゴシック", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+}
+
+.content-wrapper>.content {
+    padding: 0;
+}
+
+.page-link {
+
+    position: relative;
+
+    display: block;
+
+    padding: 0.5rem 0.75rem;
+
+    margin-left: -1px;
+
+    line-height: 1.25;
+
+    color: #6c757d;
+
+
+  }
+
+  .page-item.disabled .page-link {
+
+    color: #868e96;
+
+    pointer-events: none;
+
+    cursor: auto;
+
+
+  }
+
+  .page-item.active .page-link {
+
+    z-index: 1;
+
+    color: #fff;
+
+    background-color: #6c757d;
+
+    border-color: #6c757d;
+
+  }
+
+  .page-link:focus, .page-link:hover {
+
+    color: #fff;
+
+    text-decoration: none;
+
+    background-color: #6c757d;
+  }
+
+.form-group label.required:before { content:"*"; color:red; font-size: 1.5em; position: absolute; margin-left: -12px;margin-top: -3px;}
+
+.datepicker-days th.dow:first-child,
+.datepicker-days td:first-child { color: #f00; }
+.datepicker-days th.dow:last-child,
+.datepicker-days td:last-child { color: #00f; }
+
+.os-padding { z-index: auto !important; }
+
+.upload-image .drop {
+
+    height:100px;
+    padding: 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color:#d2d6de;
+    border: 2px dashed #d2d6de;
+}
+
+.upload-image .clickable {
+    cursor: pointer;
+}
+
+.upload-image .preview {
+    margin: 5px 0;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.upload-image .preview img {
+    width: 100%;
+}
