@@ -11,8 +11,8 @@ services:
         USER_GID: 1000
     tty: true
     volumes:
-      - ../:/var/www
-      - ./docker/workspace/config/php.ini:/etc/php/7.3/cli/conf.d/99-php.ini
+      - ${VAGRANT_DEVCONTAINER_PATH}../:/var/www
+      - ${VAGRANT_DEVCONTAINER_PATH}./docker/workspace/config/php.ini:/etc/php/7.3/cli/conf.d/99-php.ini
     environment:
       TZ: Asia/Tokyo
     working_dir: /var/www
@@ -34,9 +34,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./docker/nginx/config:/etc/nginx/conf.d/
-      - ../.docker/data/nginx/log:/var/log/nginx
-      - ../:/var/www
+      - ${VAGRANT_DEVCONTAINER_PATH}./docker/nginx/config:/etc/nginx/conf.d/
+      - ${VAGRANT_DEVCONTAINER_PATH}../.docker/data/nginx/log:/var/log/nginx
+      - ${VAGRANT_DEVCONTAINER_PATH}../:/var/www
     environment:
       TZ: Asia/Tokyo
     depends_on:
@@ -46,9 +46,9 @@ services:
   php:
     build: ./docker/php
     volumes:
-      - ./docker/php/config/php.ini:/usr/local/etc/php/php.ini
-      - ./docker/php/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
-      - ../:/var/www
+      - ${VAGRANT_DEVCONTAINER_PATH}./docker/php/config/php.ini:/usr/local/etc/php/php.ini
+      - ${VAGRANT_DEVCONTAINER_PATH}./docker/php/config/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+      - ${VAGRANT_DEVCONTAINER_PATH}../:/var/www
     working_dir: /var/www
 
   node:
@@ -57,7 +57,7 @@ services:
       - "3000:3000"
     tty: true
     volumes:
-      - ../:/var/www
+      - ${VAGRANT_DEVCONTAINER_PATH}../:/var/www
     working_dir: /var/www
 
   mariadb:
@@ -66,7 +66,7 @@ services:
       - "3306:3306"
     volumes:
       - mariadb:/var/lib/mysql
-      - ./docker/mariadb/config/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ${VAGRANT_DEVCONTAINER_PATH}./docker/mariadb/config/my.cnf:/etc/mysql/conf.d/my.cnf
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_USER: ${DB_USERNAME}
