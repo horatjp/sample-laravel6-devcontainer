@@ -1,12 +1,21 @@
-# Laravel6 Sample on Visual Studio Code Remote Container
+# Laravel6 Sample Visual Studio Code Remote Container
 
 Visual Studio CodeのRemote Containeを使ったLaravel6のサンプル。
-
 [Visual Studio Code Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
 
+#### 開発環境1
+
 * Docker Desktop
-* Visual Studio Code
 * Visual Studio Code [Remote - Containers]
+
+#### 開発環境2
+
+* Virtual Box
+* Vagrant
+* Docker CLI
+* Docker Compose
+* Visual Studio Code [Remote - Containers]
+
 
 
 ## 設定
@@ -15,11 +24,26 @@ Visual Studio CodeのRemote Containeを使ったLaravel6のサンプル。
 ```
 git clone ... laravel6
 cd laravel6
-mv .env.sample .env
 ```
+Visual Studio Codeを起動。
+
+```
+code .
+```
+
+環境設定ファイル作成。
+
+```
+cp .env.sample .env
+```
+
 `.devcontainer`にコンテナ構成ファイルがある。
 `.devcontainer/docker-compose.yml`の環境変数として、`.env`が使われる。
 データベースの値はここを参照している。
+
+
+
+### 開発環境1
 
 
 パーミッションを設定。
@@ -29,16 +53,65 @@ chmod -R 777 bootstrap/cache
 chmod -R 777 public/uploads
 ```
 
-Visual Studio Codeを起動。
-```
-code .
-```
-
 下記コマンドで`Remote - Containers`を起動
 ```
 Remote-Containers: Reopen in composer Container
 ```
-コンテナ`workspace`にログインした状態になる。
+
+
+### 開発環境2
+
+コメントアウト。
+
+`vi .env`
+
+```
+## VAGRANT
+VAGRANT_DEVCONTAINER_PATH=/vagrant/.devcontainer/
+VAGRANT_HOST="${APP_NAME}.test"
+```
+
+Vagrant起動。
+
+```
+vagrant up
+```
+
+`.vscode/settings.json` に`docker.host`が設定されているので、それを参考に、SSHでログインできるように公開鍵を登録する。
+
+```
+cp ~/.ssh/id_ed25519.pub ./
+vagrant ssh
+cat /vagrant/id_ed25519.pub >> ~/.ssh/authorized_keys
+rm /vagrant/id_ed25519.pub
+exit
+```
+
+ログインできるか確認、かつ`known_hosts `に登録。
+
+```
+ssh bargee@laravel6.test
+```
+
+`ssh-agent`に鍵を登録する。
+
+```
+ssh-add ~/.ssh/id_ed25519
+```
+
+拡張機能`Docker`で接続できるか確認。
+
+下記コマンドで`Remote - Containers`を起動
+
+```
+Remote-Containers: Reopen in composer Container
+```
+
+###### **Tips**
+
+公開鍵がRSAだとDockerホストに接続できない。
+
+---
 
 ### Laravel初期設定
 
@@ -53,6 +126,8 @@ php artisan key:gen
 ```
 npm install
 ```
+
+
 
 ## サンプル
 
@@ -77,7 +152,10 @@ http://localhost/backend
 パスワード：password
 ```
 
+> 開発環境2の場合は`.env` `VAGRANT_HOST`でアクセス。
+
 ### サンプルコマンド
+
 サンプルコマンドが下記にあり。
 ```
 app/Console/Commands/Sample
@@ -88,7 +166,10 @@ app/Console/Commands/Sample
 php artisan sample:Factory
 ```
 
-## テスト
+
+
+### テスト
+
 ##### 単体・機能テスト
 ```
 ./vendor/bin/phpunit
