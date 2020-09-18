@@ -89,9 +89,12 @@ exit
 
 ログインできるか確認、かつ`known_hosts `に登録。
 
-```
-ssh bargee@laravel6.test
-```
+> ```
+> ssh bargee@laravel6.test
+> ```
+> ```
+> ssh-keygen -R "laravel6.test"
+> ```
 
 `ssh-agent`に鍵を登録する。
 
