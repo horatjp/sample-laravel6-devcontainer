@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
 
   # Docker SSH Connection
   config.vm.provision "shell", privileged: true, inline: <<-SHELL
-    sed -i -e 's|^#\\?MaxSessions.*|MaxSessions 100|' /etc/ssh/sshd_config
+    sed -i -e 's|^#\\?MaxSessions.*|MaxSessions 200|' /etc/ssh/sshd_config
     /etc/init.d/S50sshd restart
   SHELL
 
