@@ -38,6 +38,13 @@ Vagrant.configure(2) do |config|
     sudo chmod +x /opt/bin/docker-compose
   SHELL
 
+  # Docker SSH Connection
+  config.vm.provision "shell", privileged: true, inline: <<-SHELL
+    sed -i -e 's|^#\\?MaxSessions.*|MaxSessions 200|' /etc/ssh/sshd_config
+    /etc/init.d/S50sshd restart
+  SHELL
+
+
   # VS CODE settings.json docker.host
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     FILE="/vagrant/.vscode/settings.json"
@@ -45,12 +52,6 @@ Vagrant.configure(2) do |config|
     then
       sed -i -e 's|\\(//\\)\\?\\s\\?"docker.host":.*|"docker.host": "ssh://bargee@#{ENV['VAGRANT_HOST']}",|' $FILE
     fi
-  SHELL
-
-  # Docker SSH Connection
-  config.vm.provision "shell", privileged: true, inline: <<-SHELL
-    sed -i -e 's|^#\\?MaxSessions.*|MaxSessions 200|' /etc/ssh/sshd_config
-    /etc/init.d/S50sshd restart
   SHELL
 
 end
