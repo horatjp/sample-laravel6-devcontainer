@@ -3,6 +3,8 @@ Dotenv.load
 Vagrant.configure(2) do |config|
 
   config.vm.box = "ailispaw/barge"
+    
+  #config.disksize.size = '30GB'
 
   config.vm.provider :virtualbox do |v|
     v.memory = 2048
