@@ -1,5 +1,5 @@
 {
-    // "docker.host": "ssh://bargee@laravel6.test",
+    //"docker.host": "ssh://vagrant@laravel6.test",
 
     "files.watcherExclude": {
         "**/.git/objects/**": true,

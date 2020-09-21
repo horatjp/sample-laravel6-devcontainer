@@ -61,6 +61,17 @@ Remote-Containers: Reopen in composer Container
 
 ### 開発環境2
 
+* Vagrant Plugin
+
+```
+vagrant plugin install vagrant-vbguest
+vagrant plugin install dotenv
+vagrant plugin install vagrant-disksize
+vagrant plugin install vagrant-hostsupdater
+vagrant plugin install vagrant-hostmanager
+vagrant plugin install vagrant-docker-compose
+```
+
 コメントアウト。
 
 `vi .env`
@@ -78,23 +89,17 @@ vagrant up
 ```
 
 `.vscode/settings.json` に`docker.host`が設定されているので、それを参考に、SSHでログインできるように公開鍵を登録する。
-
+ログインできるか確認、かつ`known_hosts `に登録。
 ```
+ssh-keygen -t ed25519 -C ""
 cp ~/.ssh/id_ed25519.pub ./
 vagrant ssh
 cat /vagrant/id_ed25519.pub >> ~/.ssh/authorized_keys
 rm /vagrant/id_ed25519.pub
 exit
+
+ssh vagrant@laravel6.test
 ```
-
-ログインできるか確認、かつ`known_hosts `に登録。
-
-> ```
-> ssh bargee@laravel6.test
-> ```
-> ```
-> ssh-keygen -R "laravel6.test"
-> ```
 
 `ssh-agent`に鍵を登録する。
 
