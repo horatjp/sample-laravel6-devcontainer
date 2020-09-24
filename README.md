@@ -89,7 +89,8 @@ vagrant up
 ```
 
 `.vscode/settings.json` に`docker.host`が設定されているので、それを参考に、SSHでログインできるように公開鍵を登録する。
-ログインできるか確認、かつ`known_hosts `に登録。
+`known_hosts `に登録。
+ログインできるか確認。
 ```
 ssh-keygen -t ed25519 -C ""
 cp ~/.ssh/id_ed25519.pub ./
@@ -98,6 +99,8 @@ cat /vagrant/id_ed25519.pub >> ~/.ssh/authorized_keys
 rm /vagrant/id_ed25519.pub
 exit
 
+ssh-keygen -R laravel6.test
+ssh-keyscan -H laravel6.test >> ~/.ssh/known_hosts
 ssh vagrant@laravel6.test
 ```
 
